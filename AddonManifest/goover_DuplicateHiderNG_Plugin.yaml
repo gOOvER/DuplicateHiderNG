@@ -3,13 +3,13 @@ Type: Generic
 Name: DuplicateHiderNG
 Author: gOOvER
 ShortDescription: Hides duplicate game copies based on source priority.
-InstallerManifestUrl: https://raw.githubusercontent.com/gOOvER/DuplicateHiderNG/master/InstallerManifest/goover_DuplicateHiderNG_Plugin.yaml
-SourceUrl: https://github.com/gOOvER/DuplicateHiderNG
+InstallerManifestUrl: https://raw.githubusercontent.com/gOOvER/Playnite-DuplicateHiderNG/master/InstallerManifest/goover_DuplicateHiderNG_Plugin.yaml
+SourceUrl: https://github.com/gOOvER/Playnite-DuplicateHiderNG
 Description: DuplicateHiderNG tries to hide all but one copy of the same game, based on the name of the game. This is useful if you own the same game on different platforms, like Steam and GOG, for example. In order to determine which copy stays visible, you can set up a priority list for your game's sources. Higher position in the list means higher priority for games of that source. Hiding duplicates can be done automatically (if the "Update Rank Automatically" option is enabled), or manually using the "Hide Duplicates" and "Reveal Duplicates" menu functions.
 Tags: ["duplicates", "library"]
 Links:
-    GitHub: https://github.com/gOOvER/DuplicateHiderNG
+    GitHub: https://github.com/gOOvER/Playnite-DuplicateHiderNG
     Ko-fi: https://ko-fi.com/goover
     Support: https://playnite.link/forum/thread-308.html
-IconUrl: https://raw.githubusercontent.com/gOOvER/DuplicateHiderNG/master/source/icon.png
+IconUrl: https://raw.githubusercontent.com/gOOvER/Playnite-DuplicateHiderNG/master/source/icon.png
 

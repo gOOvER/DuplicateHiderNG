@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-03
+
 ### Added
 - **AUTHORS File**: Added project `AUTHORS` file crediting original author `felixkmh` and maintainer `gOOvER`.
 - **Legacy Migration Support**: Seamless transition from legacy `felixkmh_DuplicateHider_Plugin` to DuplicateHiderNG. Preserves all user configurations, custom groups, priorities, and rules (retaining identical plugin GUID `382f8003-8ed0-4e47-ae93-05b43c9c6c32`) while cleaning up legacy plugin files.

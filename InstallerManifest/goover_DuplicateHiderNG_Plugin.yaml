@@ -3,10 +3,10 @@ Packages:
   - Version: 1.0.0
     RequiredApiVersion: 6.2.0
     ReleaseDate: 2026-10-03
-    PackageUrl: https://github.com/gOOvER/DuplicateHiderNG/releases/download/v1.0.0/goover_DuplicateHiderNG_Plugin_1_0_0.pext
+    PackageUrl: https://github.com/gOOvER/Playnite-DuplicateHiderNG/releases/download/v1.0.0/goover_DuplicateHiderNG_Plugin_1_0_0.pext
     Changelog:
       - Initial DuplicateHiderNG release by gOOvER
-      - Playnite SDK 6.18.0 & Newtonsoft.Json 13.0.4 update
+      - Playnite SDK 6.18.0 modernization and .NET Framework 4.6.2 migration
       - Fixed uninstall command invoking install method
       - Event handling safety and auto-reconnect guards
       - Added regex execution timeout (1s) against ReDoS in string filters
