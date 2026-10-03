@@ -1,6 +1,7 @@
 # DuplicateHiderNG
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/gOOvER/DuplicateHiderNG?style=flat-square)](https://github.com/gOOvER/DuplicateHiderNG/releases)
+[![Website](https://img.shields.io/badge/playnite.goover.dev-Showcase%20%26%20Downloads-ea8024?style=flat-square&logo=googlechrome&logoColor=white)](https://playnite.goover.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-F16061?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/goover)
 
@@ -8,7 +9,8 @@
 >
 > Originally created as [DuplicateHider](https://github.com/felixkmh/DuplicateHider) by felixkmh, now rebranded and actively maintained as **DuplicateHiderNG** by [gOOvER](https://github.com/gOOvER).
 
-[Playnite Forum Thread](https://playnite.link/forum/thread-308.html) | [GitHub Repository](https://github.com/gOOvER/DuplicateHiderNG)
+🌐 **Official Showcase & Direct Downloads**: [https://playnite.goover.dev/](https://playnite.goover.dev/)  
+[GitHub Repository](https://github.com/gOOvER/Playnite-DuplicateHiderNG) | [Issue Tracker](https://github.com/gOOvER/Playnite-DuplicateHiderNG/issues)
 
 ## Extension Settings
 

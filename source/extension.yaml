@@ -6,9 +6,9 @@ Module: DuplicateHider.dll
 Type: GenericPlugin
 Icon: icon.png
 Links:
-  - Name: Ko-fi
-    Url: https://ko-fi.com/goover
+  - Name: Website
+    Url: https://playnite.goover.dev
   - Name: GitHub
     Url: https://github.com/gOOvER/Playnite-DuplicateHiderNG
-  - Name: Playnite Forum
-    Url: https://playnite.link/forum/thread-308.html
+  - Name: Ko-fi
+    Url: https://ko-fi.com/goover
