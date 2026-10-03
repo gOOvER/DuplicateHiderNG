@@ -197,3 +197,12 @@ Preview:
 |View|Preview|
 |----|-------|
 |Desktop - DetailsView (Night)| ![grafik](https://user-images.githubusercontent.com/24227002/115793144-ea541680-a3cb-11eb-9138-957c8b33bd81.png) |
+
+## Support & Donate
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/goover)
+
+## License
+
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See [LICENSE](LICENSE) for details.
+
