@@ -1,6 +1,6 @@
-Id: felixkmh_DuplicateHider_Plugin
+Id: goover_DuplicateHiderNG_Plugin
 Name: DuplicateHiderNG
-Author: felixkmh
+Author: gOOvER
 Version: 1.0.0
 Module: DuplicateHider.dll
 Type: GenericPlugin
@@ -8,10 +8,7 @@ Icon: icon.png
 Links:
   - Name: Ko-fi
     Url: https://ko-fi.com/goover
-- Name: GitHub
+  - Name: GitHub
     Url: https://github.com/gOOvER/DuplicateHiderNG
   - Name: Playnite Forum
     Url: https://playnite.link/forum/thread-308.html
-  - Name: Translate
-    Url: https://crowdin.com/project/playnite-duplicate-hider-ng
-

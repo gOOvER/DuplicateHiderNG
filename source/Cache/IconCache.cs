@@ -198,8 +198,31 @@ namespace DuplicateHider.Cache
 
         private string GetUserIconPath(Game game)
         {
-            var sourceName = game?.Source?.Name ?? "Default";
             if (UserIconFolderPaths.Count == 0) UserIconFolderPaths.Add(DuplicateHiderPlugin.Instance.GetUserIconFolderPath());
+
+            // #136: Check for platform-specific user icons first (e.g. "PlayStation 5.png", "PlayStation 4.png", "Switch.png")
+            if (game?.Platforms != null)
+            {
+                foreach (var platform in game.Platforms)
+                {
+                    if (string.IsNullOrEmpty(platform?.Name)) continue;
+                    var platformMatch = UserIconFolderPaths
+                        .Where(p => System.IO.Directory.Exists(p))
+                        .SelectMany(s => System.IO.Directory.GetFiles(s))
+                        .Where(f => System.IO.Path.GetFileNameWithoutExtension(f).Equals(platform.Name, StringComparison.OrdinalIgnoreCase))
+                        .FirstOrDefault(f =>
+                            f.EndsWith(".png", StringComparison.OrdinalIgnoreCase)
+                         || f.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
+                         || f.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase)
+                         || f.EndsWith(".ico", StringComparison.OrdinalIgnoreCase));
+                    if (!string.IsNullOrEmpty(platformMatch))
+                    {
+                        return platformMatch;
+                    }
+                }
+            }
+
+            var sourceName = game?.Source?.Name ?? "Default";
             var paths = UserIconFolderPaths
                 .Where(p => System.IO.Directory.Exists(p))
                 .SelectMany(s => System.IO.Directory.GetFiles(s))
@@ -215,6 +238,7 @@ namespace DuplicateHider.Cache
                 {
                     sourceName = builtinSource;
                     paths = UserIconFolderPaths
+                        .Where(p => System.IO.Directory.Exists(p))
                         .SelectMany(s => System.IO.Directory.GetFiles(s))
                         .Where(f => System.IO.Path.GetFileNameWithoutExtension(f).Equals(sourceName, StringComparison.OrdinalIgnoreCase))
                         .FirstOrDefault(f =>

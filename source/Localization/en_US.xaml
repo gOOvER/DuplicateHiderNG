@@ -40,7 +40,7 @@ Click &quot;{0}&quot; to continue or &quot;{1}&quot; to cancel this operation.</
     <sys:String x:Key="LOC_DH_GameFields">Game Fields</sys:String>
     <sys:String x:Key="LOC_DH_SourceGames">Source Games</sys:String>
     <sys:String x:Key="LOC_DH_Warning">Warning</sys:String>
-	<sys:String x:Key="LOC_DH_Priorities">Priorites</sys:String>
+	<sys:String x:Key="LOC_DH_Priorities">Priorities</sys:String>
 	<sys:String x:Key="LOC_DH_AutomaticUpdate">Update Automatically</sys:String>
 	<sys:String x:Key="LOC_DH_ShowOtherCopies">Show Copies in Game Menu</sys:String>
 	<sys:String x:Key="LOC_DH_PrioritizeNewerGames">Prioritize newer Game from same source</sys:String>
@@ -96,5 +96,11 @@ Disabled: Score using the normal scoring method based on the source priorities.<
     <sys:String x:Key="LOC_DH_KeepButton">Keep</sys:String>
 
     <sys:String x:Key="LOC_DH_RestartMessage">Some changes require Playnite to be restarted to take effect.</sys:String>
+    <sys:String x:Key="LOC_DH_LegacyMigrationNotice">DuplicateHiderNG: Legacy DuplicateHider (felixkmh) was automatically migrated and disabled. All settings and priorities have been preserved.</sys:String>
     
+    <sys:String x:Key="LOC_DH_NavigateToOtherCopies">Select game in library instead of launching</sys:String>
+    <sys:String x:Key="LOC_DH_NavigateToOtherCopiesTooltip">When clicking an entry under 'Other Copies' in the game context menu, navigate to and select that game in Playnite instead of launching it.</sys:String>
+    <sys:String x:Key="LOC_DH_TagGames">Add [DH] tags to hidden and revealed games</sys:String>
+    <sys:String x:Key="LOC_DH_TagGamesTooltip">When enabled, automatically adds '[DH] Hidden' and '[DH] Revealed' tags to games in your library. Disable to prevent DuplicateHider from modifying your game tags.</sys:String>
+    <sys:String x:Key="LOCDeselectAllLabel">Clear All</sys:String>
 </ResourceDictionary>

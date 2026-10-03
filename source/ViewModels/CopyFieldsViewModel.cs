@@ -29,6 +29,8 @@ namespace DuplicateHider.ViewModels
 
         public ICommand ApplyCommand { get; protected set; }
         public ICommand RevertCommand { get; protected set; }
+        public RelayCommand SelectAllFieldsCommand => new RelayCommand(() => EnabledFields.SetAll(true));
+        public RelayCommand DeselectAllFieldsCommand => new RelayCommand(() => EnabledFields.SetAll(false));
 
         public class CheckableGuid
         {

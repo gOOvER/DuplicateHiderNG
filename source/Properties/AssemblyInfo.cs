@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DuplicateHider")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("DuplicateHiderNG")]
+[assembly: AssemblyDescription("DuplicateHiderNG plugin for Playnite")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DuplicateHider")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("gOOvER")]
+[assembly: AssemblyProduct("DuplicateHiderNG")]
+[assembly: AssemblyCopyright("Copyright © 2026 gOOvER")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,12 +1,12 @@
-AddonId: felixkmh_DuplicateHider_Plugin
+AddonId: goover_DuplicateHiderNG_Plugin
 Type: Generic
 Name: DuplicateHiderNG
-Author: felixkmh
+Author: gOOvER
 ShortDescription: Hides duplicate game copies based on source priority.
-InstallerManifestUrl: https://raw.githubusercontent.com/gOOvER/DuplicateHiderNG/master/InstallerManifest/felixkmh_DuplicateHider_Plugin.yaml
+InstallerManifestUrl: https://raw.githubusercontent.com/gOOvER/DuplicateHiderNG/master/InstallerManifest/goover_DuplicateHiderNG_Plugin.yaml
 SourceUrl: https://github.com/gOOvER/DuplicateHiderNG
 Description: DuplicateHiderNG tries to hide all but one copy of the same game, based on the name of the game. This is useful if you own the same game on different platforms, like Steam and GOG, for example. In order to determine which copy stays visible, you can set up a priority list for your game's sources. Higher position in the list means higher priority for games of that source. Hiding duplicates can be done automatically (if the "Update Rank Automatically" option is enabled), or manually using the "Hide Duplicates" and "Reveal Duplicates" menu functions.
-Tags: ["duplicates", "libary"]
+Tags: ["duplicates", "library"]
 Links:
     GitHub: https://github.com/gOOvER/DuplicateHiderNG
     Ko-fi: https://ko-fi.com/goover

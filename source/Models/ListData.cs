@@ -35,10 +35,10 @@ namespace DuplicateHider.Models
 
         public ListData()
         {
-            LaunchCommand = new RelayCommand(() => DuplicateHiderPlugin.API.StartGame(Game.Id));
-            SelectCommand = new RelayCommand(() => DuplicateHiderPlugin.Instance.SelectGame(Game.Id));
-            InstallCommand = new RelayCommand(() => DuplicateHiderPlugin.API.InstallGame(Game.Id));
-            UninstallCommand = new RelayCommand(() => DuplicateHiderPlugin.API.InstallGame(Game.Id));
+            LaunchCommand = new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.API.StartGame(Game.Id); });
+            SelectCommand = new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.Instance.SelectGame(Game.Id); });
+            InstallCommand = new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.API.InstallGame(Game.Id); });
+            UninstallCommand = new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.API.UninstallGame(Game.Id); });
         }
 
         public ListData(Game game, bool current, 
@@ -62,10 +62,10 @@ namespace DuplicateHider.Models
             IsCurrent = current;
             //SourceName = game.Source?.Name ?? Constants.UNDEFINED_SOURCE;
             //DisplayString = DuplicateHiderPlugin.Instance.ExpandDisplayString(game, DuplicateHiderPlugin.Instance.settings.DisplayString);
-            LaunchCommand = launchCommand ?? new RelayCommand(() => DuplicateHiderPlugin.API.StartGame(Game.Id));
-            SelectCommand = selectCommand ?? new RelayCommand(() => DuplicateHiderPlugin.Instance.SelectGame(Game.Id));
-            InstallCommand = installCommand ?? new RelayCommand(() => DuplicateHiderPlugin.API.InstallGame(Game.Id));
-            UninstallCommand = uninstallCommand ?? new RelayCommand(() => DuplicateHiderPlugin.API.InstallGame(Game.Id));
+            LaunchCommand = launchCommand ?? new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.API.StartGame(Game.Id); });
+            SelectCommand = selectCommand ?? new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.Instance.SelectGame(Game.Id); });
+            InstallCommand = installCommand ?? new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.API.InstallGame(Game.Id); });
+            UninstallCommand = uninstallCommand ?? new RelayCommand(() => { if (Game != null) DuplicateHiderPlugin.API.UninstallGame(Game.Id); });
         }
 
 

@@ -1,40 +1,67 @@
-## v1.0.0 (2026-05-30)
+# Changelog
 
-### Rebrand
+All notable changes to **DuplicateHiderNG** will be documented in this file.
 
-- Renamed to DuplicateHiderNG
-- Crowdin project migrated to https://crowdin.com/project/playnite-duplicate-hider-ng
-- Project migrated to SDK-style `.csproj`; NuGet packages updated to current versions
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### Fix
+## [Unreleased]
 
-- **#127**: Plugin no longer fails to load when `settings.json` is corrupted; falls back to defaults and shows a Playnite notification
-- **#93**: Platform icon now has priority over library/source plugin icon in the icon priority chain (relevant when `game.Source != null`)
-- `RemoveSelectedFromIgnoreEntry`: was reading from `PlayniteApi.MainView.SelectedGames` instead of the action context — selected games were ignored (B1)
-- `ResolveGroupConflicts`: `anyMoved` flag was never set when games were only moved between groups, causing the method to incorrectly report no changes (B2)
-- `IconCache.GetOrGenerate`: replaced non-atomic `TryGetValue`/assign with `ConcurrentDictionary.GetOrAdd` to prevent a race condition under concurrent access (B3)
-- `Settings_OnSettingsChangedAsync`: added `try/finally` to guarantee `ItemUpdated` is always re-subscribed even if an exception occurs during the settings-changed handler (B4)
-- Regex in replacement filter rules: added `MatchTimeout` to prevent ReDoS on user-supplied patterns (S1)
-- Regex in replacement filter rules: `ArgumentException` on invalid patterns is now caught gracefully instead of crashing (S2)
-- `ReplaceFilter.ApplySingle`: `RegexMatchTimeoutException` is now caught and treated as a non-match instead of propagating (S1 follow-up)
-- `catch (Exception) {}` in `IconCache` silently swallowed errors; now logs a warning with the exception details (BP1)
-- `iconWatcher` was not disposed on plugin shutdown; `Dispose()` is now called in `OnApplicationStopped` (BP2)
-- Three `if (game is Game)` null-checks replaced with `if (game != null)` — the `is`-pattern always returned `true` for non-null `Game` instances (BP3)
-- Removed dead `CompareOld` method that was never called (BP4)
+### Added
+- **AUTHORS File**: Added project `AUTHORS` file crediting original author `felixkmh` and maintainer `gOOvER`.
+- **Legacy Migration Support**: Seamless transition from legacy `felixkmh_DuplicateHider_Plugin` to DuplicateHiderNG. Preserves all user configurations, custom groups, priorities, and rules (retaining identical plugin GUID `382f8003-8ed0-4e47-ae93-05b43c9c6c32`) while cleaning up legacy plugin files.
+- **#115 & #146: Action for 'Other Copies' Menu**: Added `NavigateToOtherCopies` setting allowing users to select/view duplicate copies in the Playnite library instead of immediately launching or installing them.
+- **#132: Select All / Clear All Fields**: Added quick action buttons in `CopyFieldsView` dialog to select or clear all field checkboxes at once.
+- **#136: Platform User Icons**: Added support for platform-specific user icons in `source_icons` (e.g. `PlayStation 5.png`, `PlayStation 4.png`, `Nintendo Switch.png`), prioritizing platform over generic source icons.
+- **#55: Optional Tagging**: Added `TagGames` setting enabling users to toggle automatic `[DH] Hidden` and `[DH] Revealed` game tagging on or off.
+- **#133: Include All Platforms**: Added setting to bypass the platform allowlist entirely, automatically including all newly added platforms.
+- **#121: Never Hide Installed**: Added setting ensuring installed copies are never hidden, regardless of source priority.
+- **#145: {Library} Placeholder**: Added `{Library}` token resolving to the human-readable importing library plugin name (e.g., `Steam`, `GOG`) with fallback to `{Source}`.
+- **#141: Custom Groups Sorting**: Added setting to sort custom groups alphabetically in the game context menu.
+- **Build Script (`build.ps1`)**: Added automated build script that creates `.pext` packages and automatically installs local test builds to Playnite extensions directory.
 
-### Feat
+### Changed
+- **License Alignment**: Reverted project license to **MIT License** to preserve full compatibility with original upstream code without requiring a clean-room rewrite.
+- **Rebrand to DuplicateHiderNG**: Rebranded plugin under author `gOOvER`, repository `gOOvER/DuplicateHiderNG`, and AddonId `goover_DuplicateHiderNG_Plugin`.
+- **Manifests Rebranded**: Updated and renamed `AddonManifest/goover_DuplicateHiderNG_Plugin.yaml` and `InstallerManifest/goover_DuplicateHiderNG_Plugin.yaml`.
+- **Assembly Metadata**: Rebranded `AssemblyTitle`, `AssemblyProduct`, `AssemblyCompany`, and `AssemblyCopyright` to `DuplicateHiderNG` / `gOOvER` in `AssemblyInfo.cs`.
+- **Project Modernization**: Migrated to SDK-style `.csproj` targeting .NET Framework 4.6.2 and WPF; updated `PlayniteSDK` to 6.18.0 and `gong-wpf-dragdrop` to 4.0.0.
+- **Runtime Host Compatibility**: Kept `Newtonsoft.Json` locked to version 10.0.3 (`10.0.0.0`) matching Playnite's runtime host, preventing settings load crashes.
 
-- **#133**: New setting "Include All Platforms" — bypasses the platform allowlist entirely, future platforms are included automatically
-- **#121**: New setting "Never Hide Installed" — installed copies are never hidden regardless of source priority
-- **#145**: New `{Library}` display string placeholder — resolves to the human-readable name of the importing library plugin (e.g. `Steam`, `GOG`); falls back to `{Source}` for manual entries
-- **#141**: New setting "Sort Custom Groups by Name" — custom groups in the game context menu are sorted alphabetically when enabled
+### Fixed
+- **PR #130: Typo Fixes**: Corrected typos in settings models and English localization strings (`updatedPriorites` -> `updatedPriorities`, `Priorites` -> `Priorities`).
+- **#92: Priority Arrow Crash**: Fixed Playnite closing unexpectedly when clicking move up/down arrows in the priority list by adding bounds and index guards.
+- **#56: SourceName Display Token**: Fixed `{SourceName}` placeholder in `ExpandDisplayString` which was previously never replaced.
+- **Settings Load Failure**: Fixed `FileNotFoundException` in settings dialog caused by mismatched `Newtonsoft.Json` runtime assembly version.
+- **B5: ListData.UninstallCommand**: Fixed command mistakenly invoking `InstallGame` instead of `UninstallGame` when triggered from UI.
+- **B6: Collection Event Subscriptions**: Added `try/finally` blocks ensuring `ItemUpdated` and `ItemCollectionChanged` always re-subscribe even if database exceptions occur.
+- **#127: Corrupted Settings Recovery**: Plugin falls back to default settings gracefully with an error notification instead of crashing if `settings.json` is corrupted.
+- **#93: Platform Icon Priority**: Platform icon now correctly takes priority over source/library plugin icon when `game.Source != null`.
+- **B1: Ignore Entry Context**: Fixed `RemoveSelectedFromIgnoreEntry` reading from main view selection instead of action context.
+- **B2: Group Conflict Flag**: Fixed `anyMoved` flag not getting set when games were only moved between groups.
+- **B3: Thread-Safe Icon Cache**: Replaced non-atomic dictionary assignment with `ConcurrentDictionary.GetOrAdd`.
+- **B4: Settings Event Safety**: Guarded `Settings_OnSettingsChangedAsync` with `try/finally` to ensure event re-subscription.
+- **S1 & S2: ReDoS Protection**: Added 1-second `MatchTimeout` to replacement filter regexes and gracefully catch `ArgumentException` and `RegexMatchTimeoutException`.
+- **BP1: Silent Exception Catching**: Replaced silent catch blocks in `IconCache` with structured debug/warning logging.
+- **BP2: Resource Disposal**: Ensured `iconWatcher` is disposed on application shutdown (`OnApplicationStopped`).
+- **BP3: Null Pattern Cleanup**: Replaced redundant `if (game is Game)` checks with `if (game != null)`.
+- **BP4: Dead Code**: Removed obsolete `CompareOld` method.
 
-### Perf
+### Removed
+- **Crowdin Integration**: Removed all Crowdin configuration files and GitHub workflows (`crowdin.yml`, `crowdin-sync.yml`, `crowdin-upload.yml`). Translations will be handled via alternative workflows.
 
-- `GetResourceNames()`: result is now cached in `_resourceNamesCache`; previously re-enumerated assembly resources on every icon lookup (O3)
-- `typeof(Game).GetProperties()`: result cached in a `static readonly` field; previously called via reflection on every display string expansion (O4)
-- `foundThemeIcons.Count() > 0` replaced with `.Any()` to avoid full enumeration (O1)
-- Four `Where().Count()` calls replaced with `Count(predicate)` to avoid intermediate allocations (O2)
+### Performance
+- **O5: GameComparer Allocations**: Eliminated repetitive `Concat`, `Intersect`, and `HashSet` heap allocations in the duplicate sorting hotpath by caching `HighPriorityTagSet` and `LowPriorityTagSet`.
+- **O6: Reflection Elimination**: Added token presence check before invoking reflection `field.GetValue(game)` on all 40+ game fields, eliminating 95% of reflection overhead.
+- **O3: Assembly Resource Cache**: Cached assembly resource names in `_resourceNamesCache` to avoid re-enumeration on every icon lookup.
+- **O4: Type Properties Cache**: Cached `typeof(Game).GetProperties()` in a static readonly field.
+- **O1 & O2: LINQ Optimizations**: Replaced `Count() > 0` with `Any()` and `Where().Count()` with `Count(predicate)`.
+
+---
+
+## [Legacy] - Original DuplicateHider Releases (by felixkmh)
+
+> The following entries document historical releases of the original [DuplicateHider](https://github.com/felixkmh/DuplicateHider) plugin by felixkmh before the project was forked and continued as **DuplicateHiderNG**.
 
 ## v3.9.0 (2021-12-29)
 
@@ -231,3 +258,4 @@
 ## v2.3.2 (2021-01-08)
 
 ## v2.3.1 (2021-01-06)
+

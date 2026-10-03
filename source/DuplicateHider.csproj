@@ -8,6 +8,8 @@
     <TargetFramework>net462</TargetFramework>
     <UseWpf>true</UseWpf>
     <Deterministic>true</Deterministic>
+    <!-- Suppress NuGet audit warning for Newtonsoft.Json 10.0.3 which is required by Playnite runtime host -->
+    <NoWarn>$(NoWarn);NU1903</NoWarn>
     <!-- Keep existing AssemblyInfo.cs; disable auto-generated assembly attributes -->
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
@@ -41,13 +43,13 @@
   <!-- Local SDK references (not on NuGet) -->
   <ItemGroup>
     <Reference Include="QuickSearchSDK">
-      <HintPath>..\..\QuickSearch\source\bin\Release\QuickSearchSDK.dll</HintPath>
+      <HintPath>libs\QuickSearchSDK.dll</HintPath>
     </Reference>
     <Reference Include="QuickSearchSDK.Attributes">
-      <HintPath>..\..\QuickSearch\source\bin\Release\QuickSearchSDK.Attributes.dll</HintPath>
+      <HintPath>libs\QuickSearchSDK.Attributes.dll</HintPath>
     </Reference>
     <Reference Include="StartPage.SDK">
-      <HintPath>..\..\StartPage-for-Playnite\source\StartPage.SDK\bin\Release\StartPage.SDK.dll</HintPath>
+      <HintPath>libs\StartPage.SDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <!-- NuGet packages -->
@@ -56,10 +58,10 @@
     <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
     <!-- Playnite liefert diese Assemblies selbst mit → ExcludeAssets="runtime"
          verhindert, dass sie in den Plugin-Output kopiert werden (dev guide). -->
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4">
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="PlayniteSDK" Version="6.16.0">
+    <PackageReference Include="PlayniteSDK" Version="6.18.0">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
@@ -87,7 +89,7 @@
     </None>
   </ItemGroup>
 
-  <PropertyGroup>
-    <PostBuildEvent>%25LOCALAPPDATA%25\Playnite\Toolbox.exe pack $(ProjectDir)$(OutDir) $(ProjectDir)bin</PostBuildEvent>
-  </PropertyGroup>
+  <Target Name="PackOnRelease" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="&quot;$(LOCALAPPDATA)\Playnite\Toolbox.exe&quot; pack &quot;$(TargetDir.TrimEnd('\'))&quot; &quot;$(ProjectDir)bin&quot;" />
+  </Target>
 </Project>

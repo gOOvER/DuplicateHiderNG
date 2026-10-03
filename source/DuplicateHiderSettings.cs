@@ -29,6 +29,10 @@ namespace DuplicateHider
         public bool UpdateAutomatically { get; set; } = false;
         [QuickSearch.Attributes.GenericOption("LOC_DH_ShowOtherCopies", Description = "LOC_DH_ShowOtherCopiesTooltip")]
         public bool ShowOtherCopiesInGameMenu { get; set; } = false;
+        // #115 & #146: Option to navigate to other copy instead of launching
+        public bool NavigateToOtherCopies { get; set; } = false;
+        // #55: Option to toggle [DH] tagging
+        public bool TagGames { get; set; } = true;
         public string DisplayString { get; set; } = "{Name} [{Installed} on {'Source'}{, ROM: 'ImageNameNoExt}]";
 
         public UniqueList<string> Priorities { get; set; } = new UniqueList<string>();
@@ -243,9 +247,16 @@ namespace DuplicateHider
 
         private void Hl_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Hyperlink hl)
+            if (sender is Hyperlink hl && hl.NavigateUri != null)
             {
-                System.Diagnostics.Process.Start(hl.NavigateUri.AbsoluteUri);
+                try
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(hl.NavigateUri.AbsoluteUri) { UseShellExecute = true });
+                }
+                catch (Exception ex)
+                {
+                    DuplicateHiderPlugin.logger.Error(ex, "Failed to open hyperlink.");
+                }
             }
         }
 
@@ -383,6 +394,8 @@ namespace DuplicateHider
                 ExcludeSources = savedSettings.ExcludeSources;
                 IgnoredGames = savedSettings.IgnoredGames;
                 ShowOtherCopiesInGameMenu = savedSettings.ShowOtherCopiesInGameMenu;
+                NavigateToOtherCopies = savedSettings.NavigateToOtherCopies;
+                TagGames = savedSettings.TagGames;
                 DisplayString = savedSettings.DisplayString;
                 AddHiddenToIgnoreList = savedSettings.AddHiddenToIgnoreList;
                 ReplaceFilters = savedSettings.ReplaceFilters;
@@ -444,6 +457,8 @@ namespace DuplicateHider
 
                 plugin.SettingsView.AutoUpdateCheckBox.IsChecked = UpdateAutomatically;
                 plugin.SettingsView.ShowCopiesInGameMenu.IsChecked = ShowOtherCopiesInGameMenu;
+                plugin.SettingsView.NavigateToOtherCopies.IsChecked = NavigateToOtherCopies;
+                plugin.SettingsView.TagGamesCheckBox.IsChecked = TagGames;
                 plugin.SettingsView.AddHiddenToIgnoreList.IsChecked = AddHiddenToIgnoreList;
                 plugin.SettingsView.PrioritizeNewerGame.IsChecked = PreferNewerGame;
 
@@ -574,7 +589,17 @@ namespace DuplicateHider
                     plugin.SettingsView.UiIntegrationCheckBox.IsChecked = EnableUiIntegration;
                     plugin.SettingsView.PreferUserIconsCheckBox.IsChecked = PreferUserIcons;
                     plugin.SettingsView.ShowSingleSourceIconCheckBox.IsChecked = ShowSingleIcon;
-                    plugin.SettingsView.OpenUserIconFolderButton.Click += (_, __) => System.Diagnostics.Process.Start("explorer.exe", plugin.GetUserIconFolderPath());
+                    plugin.SettingsView.OpenUserIconFolderButton.Click += (_, __) =>
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(plugin.GetUserIconFolderPath()) { UseShellExecute = true });
+                    }
+                    catch (Exception ex)
+                    {
+                        DuplicateHiderPlugin.logger.Error(ex, "Failed to open user icon folder.");
+                    }
+                };
                     plugin.SettingsView.SuppressNotificationCheckBox.IsChecked = SupressThemeIconNotification;
                 }
             });
@@ -639,6 +664,8 @@ namespace DuplicateHider
 
                     UpdateAutomatically = plugin.SettingsView.AutoUpdateCheckBox.IsChecked ?? UpdateAutomatically;
                     ShowOtherCopiesInGameMenu = plugin.SettingsView.ShowCopiesInGameMenu.IsChecked ?? ShowOtherCopiesInGameMenu;
+                    NavigateToOtherCopies = plugin.SettingsView.NavigateToOtherCopies.IsChecked ?? NavigateToOtherCopies;
+                    TagGames = plugin.SettingsView.TagGamesCheckBox.IsChecked ?? TagGames;
                     AddHiddenToIgnoreList = plugin.SettingsView.AddHiddenToIgnoreList.IsChecked ?? AddHiddenToIgnoreList;
                     PreferNewerGame = plugin.SettingsView.PrioritizeNewerGame.IsChecked ?? true;
                 }
@@ -659,21 +686,21 @@ namespace DuplicateHider
                     }
                 }
 
-                UniqueList<string> updatedPriorites = new UniqueList<string> { };
+                UniqueList<string> updatedPriorities = new UniqueList<string> { };
                 {
                     foreach (ListBoxItem item in plugin.SettingsView.PriorityListBox.Items)
                     {
                         if (item.Tag is GameSource source)
                         {
-                            updatedPriorites.AddMissing(source.Name);
+                            updatedPriorities.AddMissing(source.Name);
                         }
                         else
                         {
-                            updatedPriorites.AddMissing(Constants.UNDEFINED_SOURCE);
+                            updatedPriorities.AddMissing(Constants.UNDEFINED_SOURCE);
                         }
                     }
                 }
-                Priorities = updatedPriorites;
+                Priorities = updatedPriorities;
                 {
                     foreach (CheckBox cb in plugin.SettingsView.PlatformComboBox.Items)
                     {

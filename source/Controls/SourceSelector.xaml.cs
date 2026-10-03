@@ -54,6 +54,10 @@ namespace DuplicateHider.Controls
         public SourceSelector()
         {
             InitializeComponent();
+            if (ButtonCaches[selectorNumber] == null)
+            {
+                ButtonCaches[selectorNumber] = new UnboundedCache<ContentControl>(CreateSourceIcon);
+            }
             Unloaded += SourceSelector_Unloaded;
             IsVisibleChanged += SourceSelector_IsVisibleChanged;
             IconStackPanel.Unloaded += IconStackPanel_Unloaded;
@@ -238,7 +242,7 @@ namespace DuplicateHider.Controls
         {
             if (Parent is null && !(oldParent is null))
             {
-                if (IconStackPanel.Children.Count > 0)
+                if (IconStackPanel.Children.Count > 0 && ButtonCaches[selectorNumber] != null)
                 {
                     ButtonCaches[selectorNumber].Consume(IconStackPanel.Children);
                 }

@@ -114,6 +114,17 @@
                                       Content="{DynamicResource LOC_DH_ShowOtherCopies}"
                                       ToolTip="{DynamicResource LOC_DH_ShowOtherCopiesTooltip}">
                             </CheckBox>
+                            <!-- #115 & #146: Navigate to copy instead of launch -->
+                            <CheckBox x:Name="NavigateToOtherCopies" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,3,0,0"
+                                      Content="{DynamicResource LOC_DH_NavigateToOtherCopies}"
+                                      ToolTip="{DynamicResource LOC_DH_NavigateToOtherCopiesTooltip}"
+                                      IsEnabled="{Binding IsChecked, ElementName=ShowCopiesInGameMenu}">
+                            </CheckBox>
+                            <!-- #55: Toggle [DH] tagging -->
+                            <CheckBox x:Name="TagGamesCheckBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0"
+                                      Content="{DynamicResource LOC_DH_TagGames}"
+                                      ToolTip="{DynamicResource LOC_DH_TagGamesTooltip}">
+                            </CheckBox>
                             <CheckBox Visibility="Collapsed" x:Name="PrioritizeNewerGame" Margin="0,5,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" VerticalAlignment="Center"
                                       ToolTip="{DynamicResource LOC_DH_PrioritizeNewerGamesTooltip}">
                                 <TextBlock TextWrapping="Wrap" MaxWidth="{Binding ElementName=IgnoreListBox,Path=ActualWidth}"

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -50,27 +51,42 @@ namespace DuplicateHider
 
         public ReplaceFilter(string replace, string find)
         {
-            regex = new Regex(find, RegexOptions.IgnoreCase);
+            try
+            {
+                regex = new Regex(find, RegexOptions.IgnoreCase, TimeSpan.FromSeconds(1));
+            }
+            catch (ArgumentException)
+            {
+                regex = new Regex(Regex.Escape(find), RegexOptions.IgnoreCase, TimeSpan.FromSeconds(1));
+            }
             _replace = replace;
         }
 
         public ReplaceFilter(string replace, params string[] find)
         {
-            regex = new Regex(string.Join("|", from word in find select Regex.Escape(word)), RegexOptions.IgnoreCase);
+            regex = new Regex(string.Join("|", from word in find select Regex.Escape(word)), RegexOptions.IgnoreCase, TimeSpan.FromSeconds(1));
             _replace = replace;
         }
 
         public ReplaceFilter(string replace, Regex _regex)
         {
             _replace = replace;
-            regex = _regex;
+            if (_regex != null && _regex.MatchTimeout == Regex.InfiniteMatchTimeout)
+            {
+                regex = new Regex(_regex.ToString(), _regex.Options, TimeSpan.FromSeconds(1));
+            }
+            else
+            {
+                regex = _regex;
+            }
         }
 
         public override string ApplySingle(in string input)
         {
+            if (string.IsNullOrEmpty(input) || regex == null) return input;
             try
             {
-                return regex.Replace(input, _replace);
+                return regex.Replace(input, _replace ?? string.Empty);
             }
             catch (RegexMatchTimeoutException)
             {

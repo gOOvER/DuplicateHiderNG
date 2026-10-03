@@ -179,28 +179,30 @@ namespace DuplicateHider
 
         private void ButtonDown_Click(object sender, RoutedEventArgs e)
         {
-            var item = (ListBoxItem)((Button)sender).Tag;
-            item.IsSelected = false;
-            int index = PriorityListBox.Items.IndexOf(item);
-            PriorityListBox.Items.RemoveAt(index);
-            if (index < PriorityListBox.Items.Count - 1)
+            if (sender is Button btn && btn.Tag is ListBoxItem item)
             {
-                PriorityListBox.Items.Insert(index + 1, item);
-            }
-            else
-            {
-                PriorityListBox.Items.Add(item);
+                item.IsSelected = false;
+                int index = PriorityListBox.Items.IndexOf(item);
+                if (index >= 0 && index < PriorityListBox.Items.Count - 1)
+                {
+                    PriorityListBox.Items.RemoveAt(index);
+                    PriorityListBox.Items.Insert(index + 1, item);
+                    PriorityListBox.SelectedItem = item;
+                }
             }
         }
 
         private void ButtonUp_Click(object sender, RoutedEventArgs e)
         {
-            var item = (ListBoxItem)((Button)sender).Tag;
-            int index = PriorityListBox.Items.IndexOf(item);
-            if (index > 0)
+            if (sender is Button btn && btn.Tag is ListBoxItem item)
             {
-                PriorityListBox.Items.RemoveAt(index);
-                PriorityListBox.Items.Insert(index - 1, item);
+                int index = PriorityListBox.Items.IndexOf(item);
+                if (index > 0 && index < PriorityListBox.Items.Count)
+                {
+                    PriorityListBox.Items.RemoveAt(index);
+                    PriorityListBox.Items.Insert(index - 1, item);
+                    PriorityListBox.SelectedItem = item;
+                }
             }
         }
 

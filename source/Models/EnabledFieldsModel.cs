@@ -148,5 +148,34 @@ namespace DuplicateHider.Models
 
         protected bool microTrailer;
         public bool MicroTrailer { get => microTrailer; set => SetValue(ref microTrailer, value); }
+        public void SetAll(bool state)
+        {
+            Name = state;
+            SortingName = state;
+            Platforms = state;
+            Genres = state;
+            Developers = state;
+            Publishers = state;
+            Categories = state;
+            Features = state;
+            CompletionStatus = state;
+            Tags = state;
+            Description = state;
+            ReleaseDate = state;
+            Series = state;
+            AgeRatings = state;
+            Regions = state;
+            Version = state;
+            UserScore = state;
+            CriticsScore = state;
+            CommunityScore = state;
+            BackgroundImage = state;
+            Icon = state;
+            CoverImage = state;
+            Links = state;
+            Logo = state;
+            Trailer = state;
+            MicroTrailer = state;
+        }
     }
 }

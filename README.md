@@ -1,12 +1,14 @@
 # DuplicateHiderNG
 
-> **This is a fork of [DuplicateHider](https://github.com/felixkmh/DuplicateHider) by felixkmh.**  
-> It includes bug fixes, performance improvements and new features. No new development is planned beyond translation updates.
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/gOOvER/DuplicateHiderNG?style=flat-square)](https://github.com/gOOvER/DuplicateHiderNG/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-F16061?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/goover)
 
-[Playnite Forum Post](https://playnite.link/forum/thread-308.html)  
-An extension for [Playnite](https://github.com/JosefNemec/Playnite/ "Playnite - video game library manager") by JosefNemec that hides additional copies of games.
+> **DuplicateHiderNG** is an extension for the [Playnite](https://playnite.link/ "Playnite - video game library manager") video game library manager that automatically hides duplicate copies of games across multiple digital distribution platforms (Steam, GOG, Epic, Amazon, RSI, etc.) based on configurable source priorities.
+>
+> Originally created as [DuplicateHider](https://github.com/felixkmh/DuplicateHider) by felixkmh, now rebranded and actively maintained as **DuplicateHiderNG** by [gOOvER](https://github.com/gOOvER).
 
-[![Crowdin](https://badges.crowdin.net/playnite-duplicate-hider-ng/localized.svg)](https://crowdin.com/project/playnite-duplicate-hider-ng)
+[Playnite Forum Thread](https://playnite.link/forum/thread-308.html) | [GitHub Repository](https://github.com/gOOvER/DuplicateHiderNG)
 
 ## Extension Settings
 
@@ -191,7 +193,8 @@ to the resource dictionary, a Theme can also specify the maximum number of icons
 
 ### Showcase Themes
 
-Some Themes ([Night](https://github.com/felixkmh/DH_Themes/tree/main/source/Night)) showing some possibilites of using the custom ui elements provided by DuplicateHiderNG.
+- **[Penumbra Themes Suite](https://github.com/gOOvER/Penumbra-Themes)**: Full, premium native integration for Penumbra Dawn (Desktop), Penumbra Night (Desktop), and Penumbra Blur (Fullscreen) featuring animated source selectors, custom badges, and frosted glass pill containers.
+- **Classic Themes**: Legacy showcase themes ([Night](https://github.com/felixkmh/DH_Themes/tree/main/source/Night)).
 
 Preview:
 |View|Preview|
@@ -200,9 +203,14 @@ Preview:
 
 ## Support & Donate
 
-[![Ko-fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/goover)
+If you enjoy DuplicateHiderNG and want to support its ongoing development, feel free to support on Ko-fi:
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20gOOvER-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/goover)
+
+Direct link: [https://ko-fi.com/goover](https://ko-fi.com/goover)
 
 ## License
 
-This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See [LICENSE](LICENSE) for details.
+This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+
 
